@@ -72,10 +72,11 @@ class Visual():
             # If the visual is functional...
             if self.function:
                 # If the mouse is over the visual...
-                if pygame.mouse.get_pos():
-                    # DO STUFF!
-                    pygame.quit()
-                    exit()
+                if (pygame.mouse.get_pos()[0] > self.position_x) and (pygame.mouse.get_pos()[0] < self.position_x + self.width):
+                    if (pygame.mouse.get_pos()[1] > self.position_y) and (pygame.mouse.get_pos()[1] < self.position_y + self.height):
+                        # DO STUFF!
+                        pygame.quit()
+                        exit()
 
 
 
