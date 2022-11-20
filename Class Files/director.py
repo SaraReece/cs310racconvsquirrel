@@ -36,8 +36,8 @@ class Director():
         window = pygame.display.set_mode((self.screen_width, self.screen_height))
         pygame.display.set_caption("Raccoon VS Squirrel")
 
-        # Create example objects
-        # TODO: Remove from final product
+        # Create example objects.
+        # TODO: Remove from final product.
         self.create_test_objects()
 
         # The gameplay loop. Loops until the player closes
@@ -83,6 +83,6 @@ class Director():
         self.visuals.append(button)
 
 
-# Create an instance of Director and call the "Main" function
+# Create an instance of Director and call the "Main" function.
 director = Director()
 director.main()
