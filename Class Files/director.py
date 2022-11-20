@@ -1,6 +1,7 @@
 import pygame
 from visual import Visual
 from sys import exit
+import os
 
 # Start the PyGame module.
 pygame.init()
@@ -31,7 +32,6 @@ class Director():
         """
         The main function of the Director class. Facilitates the gameplay loop.
         """
-
         # Create Test Display Surface and caption it.
         window = pygame.display.set_mode((self.screen_width, self.screen_height))
         pygame.display.set_caption("Raccoon VS Squirrel")
@@ -51,6 +51,9 @@ class Director():
                     pygame.quit()
                     exit()
 
+            # Display background image.
+            self.load_backgroung()
+
             # Draw the visuals in the window.
             for i in self.visuals:
                 i.display(window)
@@ -66,12 +69,24 @@ class Director():
             # Run the "game" at 60 fps.
             self.clock.tick(60)
 
+    # TODO: Fix this. It does not currently work.
+    def load_backgroung(self):
+        """
+        Load the background image on screen.
+        """
+        # Get the directory of this file.
+        source_file_dir = os.path.dirname(os.path.abspath(__file__))
+        # Join the filepath and the filename.
+        file_path = os.path.join(source_file_dir, "background.png")
+        # Set image and scale it to background.
+        bg_img = pygame.image.load(file_path)
+        bg_img = pygame.transform.scale(bg_img, (self.screen_width, self.screen_height))
+
 
     def create_test_objects(self):
         """
         A method to create objects for testing the Director class.
         """
-
         # Create a "Visual" object to test and add it
         # to the "visuals" list.
         visual = Visual("Does Nothing", 300, 100, 50, 50, "Red")
