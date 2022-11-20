@@ -14,8 +14,8 @@ class Director():
         Args:
             self (Director): An instance of Director.
         """
-        self.screen_width = 500
-        self.screen_height = 500
+        self.screen_width = 412
+        self.screen_height = 732
         self.visuals = []
         # Create a "Clock" object to regulate the "game's" fps.
         self.clock = pygame.time.Clock()

@@ -84,50 +84,50 @@ class Visual():
 
 
 
-#========== TEST THE VISUAL CLASS ==========#
+# #========== TEST THE VISUAL CLASS ==========#
 
-# Create Test Display Surface and caption it.
-window = pygame.display.set_mode((800, 400))
-pygame.display.set_caption("Visual/Button Class Test")
+# # Create Test Display Surface and caption it.
+# window = pygame.display.set_mode((800, 400))
+# pygame.display.set_caption("Visual/Button Class Test")
 
-# Create a list to hold the Visuals in that are in the window.
-visuals = []
+# # Create a list to hold the Visuals in that are in the window.
+# visuals = []
 
-# Create a "Clock" object to regulate the "game's" fps.
-clock = pygame.time.Clock()
+# # Create a "Clock" object to regulate the "game's" fps.
+# clock = pygame.time.Clock()
 
-# Create a "Visual" object to test and add it
-# to the "visuals" list.
-visual = Visual("Does Nothing", 300, 100, 50, 50, "Red")
-visuals.append(visual)
+# # Create a "Visual" object to test and add it
+# # to the "visuals" list.
+# visual = Visual("Does Nothing", 300, 100, 50, 50, "Red")
+# visuals.append(visual)
 
-# Create an interactive "Visual" object to testand
-# add it to the "visuals" list.
-button = Visual("Does Something", 300, 100, 50, 200, "Green", True)
-visuals.append(button)
+# # Create an interactive "Visual" object to testand
+# # add it to the "visuals" list.
+# button = Visual("Does Something", 300, 100, 50, 200, "Green", True)
+# visuals.append(button)
 
-# The gameplay loop. Loops until the player closes
-# the window.
-while True:
+# # The gameplay loop. Loops until the player closes
+# # the window.
+# while True:
 
-    # If the user clicks the "X" button at the top of
-    # the window, close the window.
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+#     # If the user clicks the "X" button at the top of
+#     # the window, close the window.
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             pygame.quit()
+#             exit()
 
-    # Draw the visuals in the window.
-    for i in visuals:
-        i.display(window)
+#     # Draw the visuals in the window.
+#     for i in visuals:
+#         i.display(window)
 
-    # Check to see if the visuals in the window
-    # need to do anything.
-    for i in visuals:
-        i.do_stuff()
+#     # Check to see if the visuals in the window
+#     # need to do anything.
+#     for i in visuals:
+#         i.do_stuff()
 
-    # Update the window.
-    pygame.display.update()
+#     # Update the window.
+#     pygame.display.update()
 
-    # Run the "game" at 60 fps.
-    clock.tick(60)
+#     # Run the "game" at 60 fps.
+#     clock.tick(60)
