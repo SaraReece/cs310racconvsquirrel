@@ -7,7 +7,7 @@ class user():
         import json
         filename = "Class Files/test.json"
 
-        entry = {'user': userName}, {'score': self.userScore}
+        entry = "<" + name + ">: {" + self.userScore + "}"
 
         #open the file and read it
         with open(filename, "r") as file:
@@ -31,7 +31,8 @@ class user():
             file_data = json.load(file)
             for x in file_data:
                 print(x)
-                if x == "{'user': '" + name + "'}":
+                print(json.dumps(x).strip())
+                if json.dumps(x).strip() == '{"user": ' + name + '"}':
                     file_data[x + 1] = entry
                 else:
                     print("nope")
@@ -44,7 +45,7 @@ class user():
 #Debugging and testing
 name = "Marissa"
 #newuser = user(name)
-user(name).updateUserData(100, name)
+user(name)
 
 #print(f"Hello {newuser.userName}")
 #print(f"Your score is: {newuser.userScore}")
