@@ -9,10 +9,16 @@ pygame.init()
 class Director():
 
     def __init__(self):
-        """Constructs a new instance of the Director class. 
+        """Constructs a new instance of the Director class. Facilitates
+        the game of "Raccoon VS Squirrel"
 
         Args:
             self (Director): An instance of Director.
+            screen_width: The display's width.
+            screen_height: The display's height.
+            visuals: The list of Visual objects that the Director
+                should be displaying.
+            clock: A PyGame Clock object used to regulate framerate.
         """
         self.screen_width = 412
         self.screen_height = 732
@@ -22,6 +28,9 @@ class Director():
 
 
     def main(self):
+        """
+        The main function of the Director class. Facilitates the gameplay loop.
+        """
 
         # Create Test Display Surface and caption it.
         window = pygame.display.set_mode((self.screen_width, self.screen_height))
@@ -59,6 +68,9 @@ class Director():
 
 
     def create_test_objects(self):
+        """
+        A method to create objects for testing the Director class.
+        """
 
         # Create a "Visual" object to test and add it
         # to the "visuals" list.
