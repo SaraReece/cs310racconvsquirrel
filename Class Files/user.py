@@ -1,11 +1,11 @@
 class user():
-    def __init__(self, userName):
-        self.userName = userName
+    def __init__(self):
         self.userScore = 0
 
-    def createUserName(self, userName):
+    def createUserName(self):
         import json
         filename = "Class Files/test.json"
+        userName = input("Please enter your name: ")
 
         entry = []
         
@@ -34,13 +34,13 @@ class user():
         with open(filename, "r") as file:
             file_data = json.load(file)
             
-
+            print("Thanks for playing!")
             for x in file_data:
                 print(f"{counter}. {x}")
                 counter += 1
 
             #select your name    
-            number = int(input("Please choose save destination number: "))
+            number = int(input("Please choose save destination(1-9): "))
             file_data[number - 1] = entry
             
         #write the new info to the file
@@ -48,11 +48,64 @@ class user():
             json.dump(file_data, file)
 
 
-#Debugging and testing
-name = input("Please enter your name: ")
-newuser = user(name)
-#newuser.createUserName(name)
-newuser.updateUserData(100, name)
+    def loadUserName(self):
+        import json
+        filename = "Class Files/test.json"
+        counter = 1
+        nameCheck = False
+        scoreCheck = False
+        name = ""
+        score = ""
 
-print(f"Hello {newuser.userName}")
-print(f"Your score is: {newuser.userScore}")
+        with open(filename, "r") as file:
+            file_data = json.load(file)
+
+        for x in file_data:
+            print("Saved Users: ")
+            print(f"{counter}. {x}")
+            counter += 1
+
+        load = int(input("Please choose your file save: "))
+        strData = str(file_data[load - 1])
+        i = 0
+        count = 0
+        for y in strData:
+            if strData[i] == ":" and strData[i - 3] == "m":
+                nameCheck = True
+                count = i + 3
+                i += 1
+                while nameCheck:
+                    for z in strData:
+                        if strData[count] == "'":
+                            nameCheck = False
+                        else:
+                            name += strData[count]
+                            count += 1
+            elif strData[i] == ":" and strData[i - 3] == "r":
+                scoreCheck = True
+                count = i + 2
+
+                while scoreCheck:
+                    for z in strData:
+                        if strData[count] == "}":
+                            scoreCheck = False
+                        else:
+                            score += (strData[count])
+                            count += 1
+                i += 1
+                score = int(score)
+            else:
+                i += 1
+        
+        finalString = (f"Name: {name}, Score: {score}")
+
+        return finalString
+#Debugging and testing
+
+#name = "Jason"
+newuser = user()
+#newuser.createUserName()
+newuser.updateUserData(500, "Eli")
+print("Successfully updated!")
+#loaded = newuser.loadUserName()
+#print(f"Successfully loaded -> {loaded}")
