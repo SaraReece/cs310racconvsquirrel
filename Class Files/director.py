@@ -26,6 +26,8 @@ class Director():
         self.visuals = []
         # Create a "Clock" object to regulate the "game's" fps.
         self.clock = pygame.time.Clock()
+        self.background_image_location = "background.png"
+        self.background = pygame.image.load(self.background_image_location)
 
 
     def main(self):
@@ -52,7 +54,7 @@ class Director():
                     exit()
 
             # Display background image.
-            self.load_backgroung()
+            window.blit(self.background, (0, 0))
 
             # Draw the visuals in the window.
             for i in self.visuals:
@@ -68,19 +70,6 @@ class Director():
 
             # Run the "game" at 60 fps.
             self.clock.tick(60)
-
-    # TODO: Fix this. It does not currently work.
-    def load_backgroung(self):
-        """
-        Load the background image on screen.
-        """
-        # Get the directory of this file.
-        source_file_dir = os.path.dirname(os.path.abspath(__file__))
-        # Join the filepath and the filename.
-        file_path = os.path.join(source_file_dir, "background.png")
-        # Set image and scale it to background.
-        bg_img = pygame.image.load(file_path)
-        bg_img = pygame.transform.scale(bg_img, (self.screen_width, self.screen_height))
 
 
     def create_test_objects(self):
