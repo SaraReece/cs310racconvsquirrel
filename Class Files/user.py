@@ -40,7 +40,7 @@ class user():
                 counter += 1
 
             #select your name    
-            number = int(input("Please enter the number located next to your name: "))
+            number = int(input("Please choose save destination number: "))
             file_data[number - 1] = entry
             
         #write the new info to the file
