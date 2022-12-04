@@ -83,7 +83,7 @@ class Director():
 
         # Create an interactive "Visual" object to testand
         # add it to the "visuals" list.
-        button = Visual("Does Something", 300, 100, 50, 200, "Green", True)
+        button = Visual("Does Something", 300, 100, 50, 550, "Green", True)
         self.visuals.append(button)
 
 
