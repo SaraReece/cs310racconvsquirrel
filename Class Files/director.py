@@ -26,6 +26,13 @@ class Director():
                 PyGame 'Image' object.
             file_selected: A Boolean variable to track if the player
                 has selected a file or not.
+            current_player: A variable to hold the current player's number.
+                If the player has not been selected yet, this string is
+                empty.
+            current_player_score: A variable to hold the current player's
+                score. If the player has not been selected yet, this
+                number is 0.
+            
             
         """
         self.screen_width = 412
@@ -35,7 +42,8 @@ class Director():
         self.clock = pygame.time.Clock()
         self.background_image_location = "background.png"
         self.background = pygame.image.load(self.background_image_location)
-        self.file_selected = False
+        self.current_player_number = 0
+        self.current_player_score = 0
 
 
     def main(self):
@@ -97,11 +105,11 @@ class Director():
 
         # Create "Visual" objects to display the game's save files
         # on screen.
-        save_file_1 = Visual("Empty", 300, 100, 56, 350, (184,72,120), True)
+        save_file_1 = Visual(f"Player 1:  Pts", 300, 100, 56, 350, (184,72,120), True)
         self.visuals.append(save_file_1)
-        save_file_2 = Visual("Empty", 300, 100, 56, 475, (184,72,120), True)
+        save_file_2 = Visual(f"Player 2:  Pts", 300, 100, 56, 475, (184,72,120), True)
         self.visuals.append(save_file_2)
-        save_file_3 = Visual("Empty", 300, 100, 56, 600, (184,72,120), True)
+        save_file_3 = Visual(f"Player 3:  Pts", 300, 100, 56, 600, (184,72,120), True)
         self.visuals.append(save_file_3)
 
 
