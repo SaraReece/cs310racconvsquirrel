@@ -35,7 +35,7 @@ class Visual():
         self.color = color
         self.text = text
         # Calculate where the x-coordinate of the text whould be.
-        self.text_position_x = position_x + 20
+        self.text_position_x = position_x + 10
         # Calculate where the y-coordinate of the text whould be.
         self.text_position_y = position_y + (height / 3.5)
         # Set the font of the Visual object.
