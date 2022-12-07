@@ -24,18 +24,11 @@ class Director():
                 of the background image.
             background: The background image loaded into a useable
                 PyGame 'Image' object.
-            file_selected: A Boolean variable to track if the player
+            save_file_path: A Boolean variable to track if the player
                 has selected a file or not.
-<<<<<<< Updated upstream
             current_player: A variable to hold the current player's number.
                 If the player has not been selected yet, this string is
                 empty.
-            current_player_score: A variable to hold the current player's
-                score. If the player has not been selected yet, this
-                number is 0.
-            
-            
-=======
             save_file_path: The file path to the json file containing
                 player data.
             users: A Python dictionary obtained from 'save_files.json'.
@@ -45,7 +38,6 @@ class Director():
             in_game: A Boolean variable to track if a continent has
                 been selected.
             current_continent: The currently selected continent.
->>>>>>> Stashed changes
         """
         self.screen_width = 412
         self.screen_height = 732
