@@ -10,7 +10,8 @@ pygame.init()
 class Director():
 
     def __init__(self):
-        """Constructs a new instance of the Director class. Facilitates
+        """
+        Constructs a new instance of the Director class. Facilitates
         the game of "Raccoon VS Squirrel"
 
         Args:
@@ -31,9 +32,7 @@ class Director():
                 empty.
             current_player_score: A variable to hold the current player's
                 score. If the player has not been selected yet, this
-                number is 0.
-            
-            
+                number is 0. 
         """
         self.screen_width = 412
         self.screen_height = 732
