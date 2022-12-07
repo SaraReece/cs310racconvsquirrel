@@ -100,12 +100,12 @@ class user():
         finalString = (f"Name: {name}, Score: {score}")
 
         return finalString
-#Debugging and testing
+# #Debugging and testing
 
-#name = "Jason"
-newuser = user()
-#newuser.createUserName()
-newuser.updateUserData(500, "Eli")
-print("Successfully updated!")
-#loaded = newuser.loadUserName()
+# #name = "Jason"
+# newuser = user()
+# #newuser.createUserName()
+# newuser.updateUserData(500, "Eli")
+# print("Successfully updated!")
+# #loaded = newuser.loadUserName()
 #print(f"Successfully loaded -> {loaded}")
