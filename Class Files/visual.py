@@ -7,13 +7,13 @@ pygame.init()
 
 class Visual():
 
-    def __init__(self, text, width, height, position_x, position_y, color, function=False):
+    def __init__(self, name, text, width, height, position_x, position_y, color, function=False):
         """Constructs a new instance of the Visual class. The Visuals
         can either be non-functional and serve only an aesthetic purpose
         or they can have a function.
-
         Args:
             self (Visual): An instance of Visual.
+            name: The name of the Visual.
             text: The text that will be displayed on the visual.
             width: The width (or length) of the visual in pixels.
             height: The height of the visual in pixels.
@@ -25,6 +25,8 @@ class Visual():
             function: Whether or not the visual serves a purpose.
                 Defaults to False.
         """
+        self.name = name
+        self.text = text
         self.width = width
         self.height = height
         # Create a PyGame Surface object using the
@@ -33,7 +35,6 @@ class Visual():
         self.position_x = position_x
         self.position_y = position_y
         self.color = color
-        self.text = text
         # Calculate where the x-coordinate of the text whould be.
         self.text_position_x = position_x + 10
         # Calculate where the y-coordinate of the text whould be.
@@ -62,7 +63,7 @@ class Visual():
         window.blit(self.render_text(self.text), (self.text_position_x, self.text_position_y))
 
 
-    def do_stuff(self):
+    def player_select_button(self):
         """
         This function is called so the Visual does something if it
         is clicked on.
@@ -75,8 +76,10 @@ class Visual():
                 if (pygame.mouse.get_pos()[0] > self.position_x) and (pygame.mouse.get_pos()[0] < self.position_x + self.width):
                     if (pygame.mouse.get_pos()[1] > self.position_y) and (pygame.mouse.get_pos()[1] < self.position_y + self.height):
                         # DO STUFF!
-                        pygame.quit()
-                        exit()
+                        return True
+                    else:
+                        # Do nothing. Lame.
+                        return False
 
 
 
