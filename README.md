@@ -7,8 +7,8 @@ This program is an educational guessing game.
 
 ### Development Environment
 
-This project was developed in Visual Studio Code
+This project was developed in Visual Studio Code.
 
-The code of this porject is written in Python and make special
+The code of this project is written in Python and makes special
 use of the PyGame, JSON, and Glob libraries.
 
