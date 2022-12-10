@@ -1,11 +1,11 @@
 # cs310racconvsquirrel
-## Overview
+### Overview
 
 This program is an educational guessing game.
 
 [Software Demo Video](https://www.youtube.com)
 
-## Development Environment
+### Development Environment
 
 This project was developed in Visual Studio Code
 
