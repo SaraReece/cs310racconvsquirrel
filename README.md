@@ -1,5 +1,14 @@
 # cs310racconvsquirrel
-pygame that helps with animal recognition from all 7 continents
+## Overview
 
+This program is an educational guessing game.
 
-Just a test
+[Software Demo Video](https://www.youtube.com)
+
+## Development Environment
+
+This project was developed in Visual Studio Code
+
+The code of this porject is written in Python and make special
+use of the PyGame, JSON, and Glob libraries.
+
