@@ -82,6 +82,25 @@ class Visual():
                         return False
 
 
+    def answer_select_button(self):
+        """
+        This function is called so the Visual does something if it
+        is clicked on.
+        """
+        # If the mouse is being pressed...
+        if pygame.mouse.get_pressed()[0]:
+            # If the visual is functional...
+            if self.function:
+                # If the mouse is over the visual...
+                if (pygame.mouse.get_pos()[0] > self.position_x) and (pygame.mouse.get_pos()[0] < self.position_x + self.width):
+                    if (pygame.mouse.get_pos()[1] > self.position_y) and (pygame.mouse.get_pos()[1] < self.position_y + self.height):
+                        # DO STUFF!
+                        return True
+                    else:
+                        # Do nothing. Lame.
+                        return False
+
+
 
 
 

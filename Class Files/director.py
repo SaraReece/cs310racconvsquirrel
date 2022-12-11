@@ -84,6 +84,9 @@ class Director():
             # the window, close the window.
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
+                    # Write scores to json file.
+
+                    # Exit the game.
                     pygame.quit()
                     exit()
 
@@ -120,26 +123,22 @@ class Director():
                     # Display the first animal selected.
                     animal_img = pygame.image.load(self.animals.animal_list[self.current_game_animals[0]]["image"])
                     window.blit(animal_img, (56, 28))
-                    # Pick the wrong answers.
-                    wrong_index_one = random.randint(0, 33)
-                    wrong_index_two = random.randint(0, 33)
-                    while wrong_index_one == self.current_game_animals[0]:
-                        wrong_index_one = random.randint()
-                    while (wrong_index_two == self.current_game_animals[0]) and (wrong_index_two == wrong_index_one):
-                        wrong_index_two = random.randint()
-                    # Display chosen indexes.
-                    print(f"""
-                    right answer index: {self.current_game_animals[0]}
-                    wrong answer 1 index: {wrong_index_one}
-                    wrong answer 2 index: {wrong_index_two}
-                    """)
-                    break
-                    
+                    # Pick the three possible answers.
+                    answer_indexes = self.pick_wrong_answers()
+                    # Display possible answers.
+                    self.game_screen(answer_indexes)
+                    # Check if the player is picking an answer.
+                    for i in self.visuals:
+                        selected_answer = i.answer_select_button()
+                        # If the player has an answer...
+                        if selected_answer:
+                            self.destroy_answers(i)
+  
             # Update the window.
             pygame.display.update()
 
-            # Run the "game" at 60 fps.
-            self.clock.tick(60)
+            # Run the "game" at 10 fps.
+            self.clock.tick(10)
 
 
     def load_users(self):
@@ -190,12 +189,90 @@ class Director():
         """
         # Set self.current_user based on the user's selection.
         self.current_user = i.name
-        # Log which player wax selected in the terminal.
+        # Log which player was selected in the terminal.
         print(f"{self.current_user} was selected")
-        # Delete everything but the title Visual in self.visuals.
+        # Delete everything  in self.visuals.
         self.visuals.clear()
 
 
+    def pick_wrong_answers(self):
+        # Pick the wrong answers.
+        answer_indexes = []
+        wrong_index_one = random.randint(0, 32)
+        wrong_index_two = random.randint(0, 32)
+        # Ensure that answers do not equal the real answer index or
+        # one another.
+        while wrong_index_one == self.current_game_animals[0]:
+            wrong_index_one = random.randint(0, 32)
+        while (wrong_index_two == self.current_game_animals[0]) and (wrong_index_two == wrong_index_one):
+            wrong_index_two = random.randint(0, 32)
+        answer_indexes.append(self.current_game_animals[0])
+        answer_indexes.append(wrong_index_one)
+        answer_indexes.append(wrong_index_two)
+        # Return answer_indexes.
+        return answer_indexes
+
+
+    def game_screen(self, answer_indexes):
+        """
+        Displays the game screen of the game to the player. This
+        allows the player to select one of the three answers as to
+        what the photo on screen is.
+        """
+        if len(self.visuals) == 0:
+            # Create "Visual" objects to display the game's answers
+            # on screen. Puts answers in a random order.
+            # Answer One:
+            selected_first_answer = random.sample(answer_indexes, 1)
+            ans_one = selected_first_answer.pop()
+            answerOne = Visual(ans_one, self.animals.animal_list[ans_one]["name"], 300, 100, 56, 350, (184,72,120), True)
+            self.visuals.append(answerOne)
+            answer_indexes.remove(ans_one)
+            # Answer Two:
+            selected_second_answer = random.sample(answer_indexes, 1)
+            ans_two = selected_second_answer.pop()
+            answerTwo = Visual(ans_two, self.animals.animal_list[ans_two]["name"], 300, 100, 56, 475, (184,72,120), True)
+            self.visuals.append(answerTwo)
+            answer_indexes.remove(ans_two)
+            #Answer Three:
+            selected_third_answer = random.sample(answer_indexes, 1)
+            ans_three = selected_third_answer.pop()
+            answerThree = Visual(ans_three, self.animals.animal_list[ans_three]["name"], 300, 100, 56, 600, (184,72,120), True)
+            self.visuals.append(answerThree)
+            answer_indexes.remove(ans_three)
+
+
+    def destroy_answers(self, i):
+        """
+        Gets rid of the visuals and buttons created by
+        save_file_select_screen().
+        """
+        # Get the name of the animal.
+        current_answer = i.name
+        selected_answer_name = self.animals.animal_list[current_answer]["name"]
+        # Log which answer was selected in the terminal.
+        print(f"{selected_answer_name} was selected")
+        # Update user score.
+        if selected_answer_name == self.animals.animal_list[self.current_game_animals[0]]["name"]:
+            print("Correct!")
+            self.current_user_score += 1
+        else:
+            print("Wrong! Boooooooo!")
+            self.current_user_score -= 1
+        # Remove the current animal.
+        self.current_game_animals.pop(0)
+        # Check if the game is over.
+        if len(self.current_game_animals) == 0:
+            print("Game Finished")
+            # Write scores to json file.
+
+            # Exit the game.
+            pygame.quit()
+            exit()
+        # Delete everything in self.visuals.
+        self.visuals.clear()
+
+   
     def create_test_objects(self):
         """
         A method to create objects for testing the Director class.
