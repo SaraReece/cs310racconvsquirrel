@@ -120,6 +120,20 @@ class Director():
                     # Display the first animal selected.
                     animal_img = pygame.image.load(self.animals.animal_list[self.current_game_animals[0]]["image"])
                     window.blit(animal_img, (56, 28))
+                    # Pick the wrong answers.
+                    wrong_index_one = random.randint(0, 33)
+                    wrong_index_two = random.randint(0, 33)
+                    while wrong_index_one == self.current_game_animals[0]:
+                        wrong_index_one = random.randint()
+                    while (wrong_index_two == self.current_game_animals[0]) and (wrong_index_two == wrong_index_one):
+                        wrong_index_two = random.randint()
+                    # Display chosen indexes.
+                    print(f"""
+                    right answer index: {self.current_game_animals[0]}
+                    wrong answer 1 index: {wrong_index_one}
+                    wrong answer 2 index: {wrong_index_two}
+                    """)
+                    break
                     
             # Update the window.
             pygame.display.update()
