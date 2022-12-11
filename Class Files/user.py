@@ -4,7 +4,7 @@ class user():
 
     def createUserName(self):
         import json
-        filename = "Class Files/test.json"
+        filename = "Class Files/save_files.json"
         userName = input("Please enter your name: ")
 
         entry = []
@@ -23,7 +23,7 @@ class user():
     #update the score to an existing user
     def updateUserData(self, score, name):
         import json
-        filename = "Class Files/test.json"
+        filename = "Class Files/save_files.json"
         counter = 1
 
         self.userScore = score
@@ -50,7 +50,7 @@ class user():
 
     def loadUserName(self):
         import json
-        filename = "Class Files/test.json"
+        filename = "Class Files/save_files.json"
         counter = 1
         nameCheck = False
         scoreCheck = False
