@@ -1,7 +1,9 @@
 import pygame
 from visual import Visual
+from animal import Animal
 from sys import exit
 import json
+import random
 
 # Start the PyGame module.
 pygame.init()
@@ -35,23 +37,29 @@ class Director():
             player_selected: A Boolean variable to track if a player has
                 been selected.
             current_user: A variable to keep track of the current user.
+            current_user_score: A variable to keep track of the current
+                user's score.
             in_game: A Boolean variable to track if a continent has
                 been selected.
-            current_continent: The currently selected continent.
+            animals: The list of animals that will be used during the game.
+            current_game_animals: A list containing the animals currently being
+                use in the game.
         """
         self.screen_width = 412
         self.screen_height = 732
         self.visuals = []
         # Create a "Clock" object to regulate the "game's" fps.
         self.clock = pygame.time.Clock()
-        self.background_image_location = "background.png"
+        self.background_image_location = "Background Photo/background.png"
         self.background = pygame.image.load(self.background_image_location)
         self.save_file_path = "Class Files/save_files.json"
         self.users = self.load_users()
         self.player_selected = False
         self.current_user = ""
+        self.current_user_score = 0
         self.in_game = False
-        self.current_continent = ""
+        self.animals = Animal()
+        self.current_game_animals = []
 
 
     def main(self):
@@ -62,9 +70,8 @@ class Director():
         window = pygame.display.set_mode((self.screen_width, self.screen_height))
         pygame.display.set_caption("Raccoon VS Squirrel")
 
-        # Create example objects.
-        # TODO: Remove from final product.
-        # self.create_test_objects()
+        # Set list of animal names and photos.
+        self.animals.setAnimalList()
 
         # Create the title at the top of the game.
         self.save_file_select_screen()
@@ -97,10 +104,23 @@ class Director():
                     # file select buttons on screen.
                     if self.player_selected:
                         self.destroy_save_file_select_screen(i)
+                self.in_game = False
             # Otherwise the user has selected a save file.
             else:
-                pass
-
+                self.in_game = True
+                animal_img = pygame.image.load(self.animals.animal_list[0]["image"])
+                window.blit(animal_img, (56, 28))
+            
+            # Play a round of guessing.
+            # if self.in_game:
+            #     # If no animals have been picked, pick them.
+            #     if len(self.current_game_animals) == 0:
+            #         picked_animals = random.sample(self.animals, 5)
+            #         self.current_game_animals = picked_animals
+            #     else:
+            #         animal_img = pygame.image.load(self.current_game_animals[0]["image"])
+            #         window.blit(animal_img, (56, 28))
+                    
             # Update the window.
             pygame.display.update()
 
@@ -116,6 +136,16 @@ class Director():
         return users
 
 
+    def add_title(self):
+        """
+        Adds the title card to the top of the window.
+        """
+        # Create a "Visual" object to display the game's title at
+        # the top of the screen.
+        title_visual = Visual("Title", "Raccoon VS Squirrel", 300, 100, 56, 28, (184,180,156))
+        self.visuals.append(title_visual)
+
+
     def save_file_select_screen(self):
         """
         Displays the first screen of the game to the player. This
@@ -123,10 +153,8 @@ class Director():
         to use. This will either be an existing user, or a new
         'Empty' file.
         """
-        # Create a "Visual" object to display the game's title at
-        # the top of the screen.
-        title_visual = Visual("Title", "Raccoon VS Squirrel", 300, 100, 56, 28, (184,180,156))
-        self.visuals.append(title_visual)
+        # Call add_title.
+        self.add_title()
 
         # Create "Visual" objects to display the game's save files
         # on screen. Get user scores from self.users.
@@ -143,16 +171,15 @@ class Director():
 
     def destroy_save_file_select_screen(self, i):
         """
-        Gets rid of the buttons created by save_file_select_screen().
+        Gets rid of the visuals and buttons created by
+        save_file_select_screen().
         """
         # Set self.current_user based on the user's selection.
         self.current_user = i.name
         # Log which player wax selected in the terminal.
         print(f"{self.current_user} was selected")
         # Delete everything but the title Visual in self.visuals.
-        title = self.visuals[0]
         self.visuals.clear()
-        self.visuals.append(title)
 
 
     def create_test_objects(self):
