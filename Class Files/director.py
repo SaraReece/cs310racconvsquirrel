@@ -108,18 +108,18 @@ class Director():
             # Otherwise the user has selected a save file.
             else:
                 self.in_game = True
-                animal_img = pygame.image.load(self.animals.animal_list[0]["image"])
-                window.blit(animal_img, (56, 28))
             
             # Play a round of guessing.
-            # if self.in_game:
-            #     # If no animals have been picked, pick them.
-            #     if len(self.current_game_animals) == 0:
-            #         picked_animals = random.sample(self.animals, 5)
-            #         self.current_game_animals = picked_animals
-            #     else:
-            #         animal_img = pygame.image.load(self.current_game_animals[0]["image"])
-            #         window.blit(animal_img, (56, 28))
+            if self.in_game:
+                # If no animals have been picked, pick indexes for them.
+                if len(self.current_game_animals) == 0:
+                    animal_indexes = random.sample(range(33), 5)
+                    # Set the indexes.
+                    self.current_game_animals = animal_indexes
+                else:
+                    # Display the first animal selected.
+                    animal_img = pygame.image.load(self.animals.animal_list[self.current_game_animals[0]]["image"])
+                    window.blit(animal_img, (56, 28))
                     
             # Update the window.
             pygame.display.update()
