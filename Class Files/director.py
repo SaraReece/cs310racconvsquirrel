@@ -1,6 +1,7 @@
 import pygame
 from visual import Visual
 from animal import Animal
+from user import User
 from sys import exit
 import json
 import random
@@ -85,7 +86,7 @@ class Director():
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     # Write scores to json file.
-
+                    self.update_user_data()
                     # Exit the game.
                     pygame.quit()
                     exit()
@@ -146,6 +147,7 @@ class Director():
         with open(self.save_file_path, "r") as file:
             users = json.load(file)
         # Return file data as Python dictionary.
+        print(users)
         return users
 
 
@@ -265,13 +267,32 @@ class Director():
         if len(self.current_game_animals) == 0:
             print("Game Finished")
             # Write scores to json file.
-
+            self.update_user_data()
             # Exit the game.
             pygame.quit()
             exit()
         # Delete everything in self.visuals.
         self.visuals.clear()
 
+
+    def update_user_data(self):
+        """
+        Updates scores in JSON file.
+        """
+        if self.current_user == "userOne":
+            index = 0
+        elif self.current_user == "userTwo":
+            index = 1
+        elif self.current_user == "userThree":
+            index = 2
+
+        # Get the new player score.
+        old_player_score = self.users[index][self.current_user]
+        new_score = old_player_score + self.current_user_score
+
+        # Write to file.
+        us = User()
+        us.updateUserData(new_score, self.current_user, index)
    
     def create_test_objects(self):
         """

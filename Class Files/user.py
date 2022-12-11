@@ -1,4 +1,4 @@
-class user():
+class User():
     def __init__(self):
         self.userScore = 0
 
@@ -21,14 +21,14 @@ class user():
             json.dump(file_data, file)
 
     #update the score to an existing user
-    def updateUserData(self, score, name):
+    def updateUserData(self, score, name, index):
         import json
         filename = "Class Files/save_files.json"
         counter = 1
 
         self.userScore = score
 
-        entry = {'name': name, 'score': score}
+        entry = {name: score}
 
         #open the file and read it
         with open(filename, "r") as file:
@@ -40,8 +40,7 @@ class user():
                 counter += 1
 
             #select your name    
-            number = int(input("Please choose save destination(1-9): "))
-            file_data[number - 1] = entry
+            file_data[index] = entry
             
         #write the new info to the file
         with open(filename, "w") as file:
